@@ -6,7 +6,7 @@ export default class App extends Component {
     return (
       <div>
         <h1>Course Library</h1>
-        <CourseLibrary/>
+        <CourseLibrary />
       </div>
     );
   }

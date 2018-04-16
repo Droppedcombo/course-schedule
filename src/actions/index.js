@@ -1,7 +1,7 @@
 import { FETCH_COURSES} from "./types";
 
-export function fetchCourse() {
-    return{
+export function fetchCourses() {
+    return {
         type: FETCH_COURSES,
         payload: [
             {

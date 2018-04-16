@@ -17,13 +17,13 @@ class CourseLibrary extends Component {
     renderCourse(course) {
         return ( 
         <li key={course.title} className="course">
-            <div className="course_info">
-                <div className="course_title-container">
-                  <div className="course_title">{course.title}</div>
+            <div className="course__info">
+                <div className="course__title-container">
+                  <div className="course__title">{course.title}</div>
                 </div>
             </div>
-            <div className="course_description">
-                <h6 className="course_description-title">Course Description</h6>
+            <div className="course__description">
+                <h6 className="course__description-title">Course description</h6>
                 <p>{course.description}</p>
             </div> 
         </li>
@@ -31,15 +31,18 @@ class CourseLibrary extends Component {
     }
 
     render() {
+
         return (
             <ul>
 
-               {this.props.courses.map(this.renderCourse)}          
+               {this.props.courses.map(this.renderCourse)} 
+
             </ul>
 
         )
-
     }
+
+    
 }
 
 function mapStateToProps(state) {
