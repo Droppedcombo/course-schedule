@@ -1,7 +1,8 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
+import { connect, dispatch } from 'react-redux';
+import { fetchCourses } from '../actions';
 
-class CourseLibrary extends React.Component {
-
+class CourseLibrary extends Component {
 
     constructor(props) {
         super(props)
@@ -9,10 +10,13 @@ class CourseLibrary extends React.Component {
         this.renderCourse = this.renderCourse.bind(this);
     }
 
+    componentDidMount() {
+        this.props.fetchCourses()
+    }
 
     renderCourse(course) {
         return ( 
-        <li className="course">
+        <li key={course.title} className="course">
             <div className="course_info">
                 <div className="course_title-container">
                   <div className="course_title">{course.title}</div>
@@ -29,8 +33,8 @@ class CourseLibrary extends React.Component {
     render() {
         return (
             <ul>
-               {this.renderCourse({"title": "Up and Running with Redis", "description": "In this course you'll learn how to work with the efficient Redis database to manage key value relationships."})}
-               {this.renderCourse({"title": "UX for Developers", "description": "This User Experience(UX) course examines how to develop a system for approaching application development and enhancing the experience for users."})}
+
+               {this.props.courses.map(this.renderCourse)}          
             </ul>
 
         )
@@ -38,4 +42,17 @@ class CourseLibrary extends React.Component {
     }
 }
 
-export default CourseLibrary;
+function mapStateToProps(state) {
+    console.log(`state courses are: ${JSON.stringify(state.courses)}`)
+    return { courses: state.courses }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+    fetchCourses:() => {
+        dispatch(fetchCourses());
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CourseLibrary);
